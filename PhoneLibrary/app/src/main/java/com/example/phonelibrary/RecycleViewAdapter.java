@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
 
 import com.bumptech.glide.Glide;
 
@@ -54,6 +57,21 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                 Toast.makeText(context, books.get(position).getName()+" selected.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.shortDesc.setText(books.get(position).getShortDesc());
+        holder.authorName.setText(books.get(position).getAuthor());
+        holder.authorText.setText(books.get(position).getName());
+
+        if (books.get(position).isCollapse()){
+            TransitionManager.beginDelayedTransition(holder.parent);
+            holder.collapseRelative.setVisibility(View.VISIBLE);
+            holder.downImage.setVisibility(View.GONE);
+        }else {
+            TransitionManager.beginDelayedTransition(holder.parent);
+            holder.collapseRelative.setVisibility(View.GONE);
+            holder.downImage.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -70,13 +88,39 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         private CardView parent;
         private ImageView imageBook;
         private TextView textBookName;
+        private ImageView upImage,downImage;
+        private RelativeLayout collapseRelative;
+        private TextView authorName,authorText,shortDesc;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             parent = itemView.findViewById(R.id.parent);
             imageBook = itemView.findViewById(R.id.imageBook);
             textBookName = itemView.findViewById(R.id.textName);
+            upImage = itemView.findViewById(R.id.up_collapse);
+            downImage = itemView.findViewById(R.id.down_collapse);
+            collapseRelative = itemView.findViewById(R.id.collapseRelLayout);
+            authorName = itemView.findViewById(R.id.authorText);
+            authorText = itemView.findViewById(R.id.textAuthor);
+            shortDesc = itemView.findViewById(R.id.shortDesc);
 
+            upImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Books book = books.get(getAdapterPosition());
+                    book.setCollapse(!book.isCollapse());
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
+
+            downImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Books book = books.get(getAdapterPosition());
+                    book.setCollapse(!book.isCollapse());
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
 
         }
 

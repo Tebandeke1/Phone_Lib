@@ -8,6 +8,7 @@ public class Books {
     private String imageUrl;
     private String shortDesc;
     private String longDesc;
+    private boolean isCollapse;
 
     public Books(int id, String name, String author, int pages, String imageUrl, String shortDesc, String longDesc) {
         this.id = id;
@@ -17,6 +18,23 @@ public class Books {
         this.imageUrl = imageUrl;
         this.shortDesc = shortDesc;
         this.longDesc = longDesc;
+        this.isCollapse = false;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public boolean isCollapse() {
+        return isCollapse;
+    }
+
+    public void setCollapse(boolean collapse) {
+        isCollapse = collapse;
     }
 
     public int getId() {

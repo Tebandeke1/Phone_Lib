@@ -5,29 +5,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="7dp"
     app:cardCornerRadius="7dp"
+    android:layout_margin="7dp"
     android:id="@+id/parent">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="210dp"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageBook"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:id="@+id/textName"
+        <RelativeLayout
+            android:id="@+id/firstLayout"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageBook"
+                android:layout_width="200dp"
+                android:layout_height="210dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageBook"
+                android:layout_marginTop="5dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:text="Tabu Book" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_down_collapse"
+                android:id="@+id/down_collapse"
+                android:layout_below="@id/imageBook"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/firstLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageBook"
-            android:layout_marginTop="5dp"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:text="Tabu Book"
-            android:layout_centerInParent="true"/>
+            android:id="@+id/collapseRelLayout"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:id="@+id/authorText"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textAuthor"
+                android:text="Author"
+                android:layout_below="@id/authorText"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/shortDesc"
+                android:text="Short desc"
+                android:layout_below="@id/textAuthor"
+                android:layout_marginTop="5dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_up_collapse"
+                android:layout_below="@id/shortDesc"
+                android:id="@+id/up_collapse"
+                android:layout_alignParentEnd="true"/>
+
+
+        </RelativeLayout>
     </RelativeLayout>
+
+
 
 </com.google.android.material.card.MaterialCardView>
