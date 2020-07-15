@@ -27,12 +27,7 @@ public class AllBooksActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<Books> books = new ArrayList<>();
 
-        books.add(new Books(1,"1Q84","Haruki",13093,"https://i.pinimg.com/originals/28/c6/d1/28c6d1b0e6163232ed4bd9e488f8d54c.png","Sart from here","End here."));
-
-        books.add(new Books(1,"1Q84","Haruki",13093,"https://i.pinimg.com/originals/28/c6/d1/28c6d1b0e6163232ed4bd9e488f8d54c.png","Sart from here","End here."));
-
-        adapter.setBooks(books);
+        adapter.setBooks(Utils.getInstance().getAllBooks());
     }
 }

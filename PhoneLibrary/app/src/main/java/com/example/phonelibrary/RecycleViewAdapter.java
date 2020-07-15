@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> {
     private static final String TAG = "RecycleViewAdapter";
+    public static final String BOOK_ID_KEY = "bookId";
 
 
     ArrayList<Books> books = new ArrayList<>();
@@ -56,6 +57,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,BookActivity.class);
+                intent.putExtra(BOOK_ID_KEY,books.get(position).getId());
                 context.startActivity(intent);
             }
         });

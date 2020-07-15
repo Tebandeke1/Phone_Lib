@@ -2,12 +2,16 @@ package com.example.phonelibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import static com.example.phonelibrary.RecycleViewAdapter.BOOK_ID_KEY;
 
 public class BookActivity extends AppCompatActivity {
 
@@ -20,33 +24,54 @@ public class BookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
-        String longDec = "A design patterns are well-proved solution for solving the specific problem/task.\n" +
-                "\n" +
-                "Now, a question will be arising in your mind what kind of specific problem? Let me explain by taking an example.\n" +
-                "\n" +
-                "Problem Given:\n" +
-                "Suppose you want to create a class for which only a single instance (or object) should be created and that single object can be used by all other classes.\n" +
-                "\n" +
-                "Solution:\n" +
-                "Singleton design pattern is the best solution of above specific problem. So, every design pattern has some specification or set of rules for solving the problems. What are those specifications, you will see later in the types of design patterns.\n" +
-                "\n" +
-                "But remember one-thing, design patterns are programming language independent strategies for solving the common object-oriented design problems. That means, a design pattern represents an idea, not a particular implementation.\n" +
-                "\n" +
-                "By using the design patterns you can make your code more flexible, reusable and maintainable. It is the most important part because java internally follows design patterns.\n" +
-                "\n" +
-                "To become a professional software developer, you must know at least some popular solutions (i.e. design patterns) to the coding problems.";
-
+        //initializing the views
         initViews();
 
-        Books book = new Books(1,"1Q84","Haruki",13093,
-                "https://i.pinimg.com/originals/28/c6/d1/28c6d1b0e6163232ed4bd9e488f8d54c.png",
-                "Sart from here",longDec);
+//        String longDec = "A design patterns are well-proved solution for solving the specific problem/task.\n" +
+//                "\n" +
+//                "Now, a question will be arising in your mind what kind of specific problem? Let me explain by taking an example.\n" +
+//                "\n" +
+//                "Problem Given:\n" +
+//                "Suppose you want to create a class for which only a single instance (or object) should be created and that single object can be used by all other classes.\n" +
+//                "\n" +
+//                "Solution:\n" +
+//                "Singleton design pattern is the best solution of above specific problem. So, every design pattern has some specification or set of rules for solving the problems. What are those specifications, you will see later in the types of design patterns.\n" +
+//                "\n" +
+//                "But remember one-thing, design patterns are programming language independent strategies for solving the common object-oriented design problems. That means, a design pattern represents an idea, not a particular implementation.\n" +
+//                "\n" +
+//                "By using the design patterns you can make your code more flexible, reusable and maintainable. It is the most important part because java internally follows design patterns.\n" +
+//                "\n" +
+//                "To become a professional software developer, you must know at least some popular solutions (i.e. design patterns) to the coding problems.";
+//
+//        initViews();
+//
+//        Books book = new Books(1,"1Q84","Haruki",13093,
+//                "https://i.pinimg.com/originals/28/c6/d1/28c6d1b0e6163232ed4bd9e488f8d54c.png",
+//                "Sart from here",longDec);
 
 
-        setData(book);
+        //here were getting the books object using the books id from the Utils class
+        Intent intent = getIntent();
+
+        //first make sure the intent is not null  because it may cause some UI problems
+        if (intent != null){
+            int id = intent.getIntExtra(BOOK_ID_KEY,-1);
+
+            //make sure that also the id is not negative -1
+            if (id != -1){
+                Books IncomingBook= Utils.getInstance().getBookId(id);
+
+                if (null != IncomingBook){
+
+                    setData(IncomingBook);
+                    Toast.makeText(this, IncomingBook.getName(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
     }
 
-    public void setData(Books books){
+    private void setData(Books books){
         bookName.setText(books.getName());
         author.setText(books.getAuthor());
         pages.setText(String.valueOf(books.getPages()));
