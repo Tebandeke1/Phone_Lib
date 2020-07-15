@@ -95,4 +95,9 @@ public class Utils {
 
         return null;
     }
+
+    //this method helps to add books that are already read to the already read arrayList
+    public boolean addAlreadyReadBooks(Books books){
+        return alreadyReadyBooks.add(books);
+    }
 }

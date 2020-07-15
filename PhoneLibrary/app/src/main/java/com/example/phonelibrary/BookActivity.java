@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 import static com.example.phonelibrary.RecycleViewAdapter.BOOK_ID_KEY;
 
@@ -65,10 +68,44 @@ public class BookActivity extends AppCompatActivity {
 
                     setData(IncomingBook);
                     Toast.makeText(this, IncomingBook.getName(), Toast.LENGTH_SHORT).show();
+
+                    handleAlreadyReadBooks(IncomingBook);
                 }
             }
         }
 
+    }
+
+    //this method works on Already read btn
+    //this helps to manage already read books in the Books activity
+    private void handleAlreadyReadBooks(final Books incomingBook) {
+
+        final ArrayList<Books> alreadyReady = Utils.getInstance().getAlreadyReadyBooks();
+
+        boolean read = false;
+        for (Books b : alreadyReady){
+            if (b.getId() == incomingBook.getId()){
+                read = true;
+            }
+        }
+
+        if (read){
+            AlreadyRead.setEnabled(false);
+        }else {
+            AlreadyRead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (Utils.getInstance().addAlreadyReadBooks(incomingBook)){
+                        Toast.makeText(BookActivity.this, "Book added successfully.", Toast.LENGTH_SHORT).show();
+                        //TODO open another activity here
+                    }else {
+                        Toast.makeText(BookActivity.this, "Something happened try again.", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
     }
 
     private void setData(Books books){
