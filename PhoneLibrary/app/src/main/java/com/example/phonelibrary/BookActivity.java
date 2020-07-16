@@ -18,7 +18,7 @@ import static com.example.phonelibrary.RecycleViewAdapter.BOOK_ID_KEY;
 
 public class BookActivity extends AppCompatActivity {
 
-    private Button currentlyReading, wantToRead,AlreadyRead,Favouraties;
+    private Button wantToread, wantToRead,AlreadyRead,Favouraties;
     private TextView  bookName,author,pages,longDesc;
     private ImageView imageView;
 
@@ -68,10 +68,112 @@ public class BookActivity extends AppCompatActivity {
 
                     setData(IncomingBook);
                     Toast.makeText(this, IncomingBook.getName(), Toast.LENGTH_SHORT).show();
-
                     handleAlreadyReadBooks(IncomingBook);
+                    handleCurrentReadingBooks(IncomingBook);
+                    handleAddedToFavouritesBooks(IncomingBook);
+                    handleWantToReadBooks(IncomingBook);
                 }
             }
+        }
+
+    }
+
+    //this method works on handling Current reading books
+    // this helps to manage current reading books activity
+    private void handleCurrentReadingBooks(final Books incomingBook) {
+
+        ArrayList<Books> current = Utils.getCurrentlyReadingBooks();
+
+        boolean want  = false;
+
+        for (Books b : current){
+            if (b.getId() == incomingBook.getId()){
+                want = true;
+            }
+        }
+
+        if (want){
+            wantToread.setEnabled(false);
+        }else {
+            wantToread.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utils.getInstance().addCurrentReading(incomingBook)){
+                        Toast.makeText(BookActivity.this, "Book added to Current Reading books.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this,CurrentReadingActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(BookActivity.this, "Something went wrong try again..", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
+
+
+    //this method works on handling favourites books to be read
+    //this helps in managing favourites activities
+    private void handleAddedToFavouritesBooks(final Books incomingBook) {
+
+        ArrayList<Books> favbooks = Utils.getFavouriteBooks();
+
+        boolean fav  = false;
+
+        for (Books b : favbooks){
+            if (b.getId() == incomingBook.getId()){
+                fav = true;
+            }
+        }
+
+        if (fav){
+            Favouraties.setEnabled(false);
+        }else {
+            Favouraties.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utils.getInstance().addFavouriteBooks(incomingBook)){
+                        Toast.makeText(BookActivity.this, "Book added to favourites  books.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this,AddToFavouritesActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(BookActivity.this, "Something went wrong try again..", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
+
+    //this method is for working on handling want to read books
+    // this helps in managing want to read activities
+    private void handleWantToReadBooks(final Books incomingBook) {
+
+        ArrayList<Books> current = Utils.getWantToReadBooks();
+
+        boolean wantoread  = false;
+
+        for (Books b : current){
+            if (b.getId() == incomingBook.getId()){
+                wantoread = true;
+            }
+        }
+
+        if (wantoread){
+            wantToRead.setEnabled(false);
+        }else {
+            wantToRead.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Utils.getInstance().addWantToReadBooks(incomingBook)){
+                        Toast.makeText(BookActivity.this, "Book added to Want to read  books.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this,WantToReadActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(BookActivity.this, "Something went wrong try again..", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
 
     }
@@ -99,6 +201,9 @@ public class BookActivity extends AppCompatActivity {
                     if (Utils.getInstance().addAlreadyReadBooks(incomingBook)){
                         Toast.makeText(BookActivity.this, "Book added successfully.", Toast.LENGTH_SHORT).show();
                         //TODO open another activity here
+
+                        Intent intent = new Intent(BookActivity.this,AlreadyReadActivity.class);
+                        startActivity(intent);
                     }else {
                         Toast.makeText(BookActivity.this, "Something happened try again.", Toast.LENGTH_SHORT).show();
                     }
@@ -120,7 +225,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        currentlyReading = findViewById(R.id.currentReading);
+        wantToread = findViewById(R.id.currentReading);
         wantToRead = findViewById(R.id.wantToRead);
         AlreadyRead = findViewById(R.id.already_read);
         Favouraties = findViewById(R.id.favouritesbtn);
