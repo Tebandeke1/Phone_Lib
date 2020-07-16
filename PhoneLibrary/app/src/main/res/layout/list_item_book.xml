@@ -79,6 +79,17 @@
                 android:id="@+id/up_collapse"
                 android:layout_alignParentEnd="true"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:id="@+id/delete_btn"
+                android:layout_below="@id/shortDesc"
+                android:layout_toLeftOf="@id/up_collapse"
+                android:layout_marginEnd="7dp"
+                android:visibility="gone"
+                android:textColor="@color/red"/>
+
 
         </RelativeLayout>
     </RelativeLayout>

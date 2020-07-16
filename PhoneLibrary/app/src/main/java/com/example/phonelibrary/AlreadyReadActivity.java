@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
+import static com.example.phonelibrary.RecycleViewAdapter.DELETE_ALREADY_READ_BOOKS;
+
 public class AlreadyReadActivity extends AppCompatActivity {
 
     private  RecycleViewAdapter recycleViewAdapter;
@@ -20,7 +22,7 @@ public class AlreadyReadActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recBooksRead);
 
-        recycleViewAdapter = new RecycleViewAdapter(this);
+        recycleViewAdapter = new RecycleViewAdapter(this,DELETE_ALREADY_READ_BOOKS);
 
         recyclerView.setAdapter(recycleViewAdapter);
 

@@ -1,6 +1,8 @@
 package com.example.phonelibrary;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,8 +31,17 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     ArrayList<Books> books = new ArrayList<>();
     private Context context;
 
-    public RecycleViewAdapter(Context context){
+    private String parentActivity;
+
+    public static final String DELETE_ALL_BOOKS = "allbooks";
+    public static final String DELETE_FAVOURITE_BOOKS = "favouriteBooks";
+    public static final String DELETE_ALREADY_READ_BOOKS = "alreadyRead";
+    public static final String DELETE_CURRENT_READING_BOOKS = "currentReading";
+    public static final String DELETE_WANT_TO_READ_BOOKS = "wantToRead";
+
+    public RecycleViewAdapter(Context context, String parentActivity) {
         this.context = context;
+        this.parentActivity = parentActivity;
     }
 
     @NonNull
@@ -70,6 +81,129 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.collapseRelative.setVisibility(View.VISIBLE);
             holder.downImage.setVisibility(View.GONE);
+
+            if (parentActivity.equals(DELETE_ALL_BOOKS)){
+                holder.deleteBtn.setVisibility(View.GONE);
+
+
+            }else if (parentActivity.equals(DELETE_ALREADY_READ_BOOKS)){
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //this Alert dialog helps in case a user has pressed on the delete btn mistakenly
+                        AlertDialog.Builder  builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Are you sure you want to delete "+books.get(position).getName());
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //check if a book is removed successfully and show a text message
+                                if( Utils.getInstance().removeAlreadyReadBook(books.get(position))) {
+                                    Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.create().show();
+                    }
+                });
+
+
+            }else if(parentActivity.equals(DELETE_CURRENT_READING_BOOKS)){
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //this Alert dialog helps in case a user has pressed on the delete btn mistakenly
+                        AlertDialog.Builder  builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Are you sure you want to delete "+books.get(position).getName());
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //check if a book is removed successfully and show a text message
+                                if( Utils.getInstance().removeCurrentReadingBooks(books.get(position))) {
+                                    Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.create().show();
+                    }
+                });
+
+
+            }else if ((parentActivity.equals(DELETE_FAVOURITE_BOOKS))){
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //this Alert dialog helps in case a user has pressed on the delete btn mistakenly
+                        AlertDialog.Builder  builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Are you sure you want to delete "+books.get(position).getName());
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //check if a book is removed successfully and show a text message
+                                if( Utils.getInstance().removeFavouritesBooks(books.get(position))) {
+                                    Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.create().show();
+                    }
+                });
+
+
+            }else if (parentActivity.equals(DELETE_WANT_TO_READ_BOOKS)){
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+
+                holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //this Alert dialog helps in case a user has pressed on the delete btn mistakenly
+                        AlertDialog.Builder  builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Are you sure you want to delete "+books.get(position).getName());
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //check if a book is removed successfully and show a text message
+                                if( Utils.getInstance().removeWantToReadBooks(books.get(position))) {
+                                    Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.create().show();
+                    }
+                });
+
+
+            }
         }else {
             TransitionManager.beginDelayedTransition(holder.parent);
             holder.collapseRelative.setVisibility(View.GONE);
@@ -95,6 +229,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         private ImageView upImage,downImage;
         private RelativeLayout collapseRelative;
         private TextView authorName,authorText,shortDesc;
+        private TextView deleteBtn;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -107,6 +242,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             authorName = itemView.findViewById(R.id.authorText);
             authorText = itemView.findViewById(R.id.textAuthor);
             shortDesc = itemView.findViewById(R.id.shortDesc);
+            deleteBtn = itemView.findViewById(R.id.delete_btn);
 
             upImage.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import static com.example.phonelibrary.RecycleViewAdapter.DELETE_WANT_TO_READ_BOOKS;
+
 public class WantToReadActivity extends AppCompatActivity {
 
     @Override
@@ -13,7 +15,7 @@ public class WantToReadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_want_to_read);
 
-        RecycleViewAdapter adapter = new RecycleViewAdapter(this);
+        RecycleViewAdapter adapter = new RecycleViewAdapter(this,DELETE_WANT_TO_READ_BOOKS);
 
         RecyclerView recyclerView = findViewById(R.id.wantRecBooks);
 
