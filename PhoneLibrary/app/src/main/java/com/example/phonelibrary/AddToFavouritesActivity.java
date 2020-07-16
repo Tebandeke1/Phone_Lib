@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import static com.example.phonelibrary.RecycleViewAdapter.DELETE_FAVOURITE_BOOKS;
+
 public class AddToFavouritesActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +17,7 @@ public class AddToFavouritesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_to_favourites);
 
         RecyclerView recyclerView = findViewById(R.id.recBookFav);
-        RecycleViewAdapter adapter  = new RecycleViewAdapter(this);
+        RecycleViewAdapter adapter  = new RecycleViewAdapter(this,DELETE_FAVOURITE_BOOKS);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

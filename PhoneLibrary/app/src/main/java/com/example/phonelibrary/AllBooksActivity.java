@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+import static com.example.phonelibrary.RecycleViewAdapter.DELETE_ALL_BOOKS;
+
 public class AllBooksActivity extends AppCompatActivity {
 
 
@@ -19,7 +21,7 @@ public class AllBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_books);
 
-        adapter = new RecycleViewAdapter(this);
+        adapter = new RecycleViewAdapter(this,DELETE_ALL_BOOKS);
 
         recyclerView = findViewById(R.id.recycleView);
 
