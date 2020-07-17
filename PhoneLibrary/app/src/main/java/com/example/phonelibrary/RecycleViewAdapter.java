@@ -181,6 +181,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                     public void onClick(View v) {
                         //this Alert dialog helps in case a user has pressed on the delete btn mistakenly
                         AlertDialog.Builder  builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Want To Read Books");
                         builder.setMessage("Are you sure you want to delete "+books.get(position).getName());
                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
