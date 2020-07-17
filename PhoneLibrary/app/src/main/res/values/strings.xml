@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Phone Library</string>
+    <string name="all_books_activity">All Books Available</string>
+    <string name="Alredy_ready">Already Read Books</string>
+    <string name="book_details">Book Details</string>
+    <string name="Want_to_read">Wish To Read Books</string>
+    <string name="web_view">Web View </string>
+    <string name="favourites">Favourite Books</string>
+    <string name="current">Current Reading Books</string>
+
 </resources>

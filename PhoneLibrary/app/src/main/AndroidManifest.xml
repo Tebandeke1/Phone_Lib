@@ -9,13 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WebViewActivity"></activity>
-        <activity android:name=".AddToFavouritesActivity" />
-        <activity android:name=".CurrentReadingActivity" />
-        <activity android:name=".WantToReadActivity" />
-        <activity android:name=".AlreadyReadActivity" />
-        <activity android:name=".BookActivity" />
-        <activity android:name=".AllBooksActivity" />
+        <activity android:name=".WebViewActivity"
+            android:label="@string/web_view"/>
+        <activity android:name=".AddToFavouritesActivity"
+            android:label="@string/favourites"/>
+        <activity android:name=".CurrentReadingActivity"
+            android:label="@string/current"/>
+        <activity android:name=".WantToReadActivity"
+            android:label="@string/Want_to_read"/>
+        <activity android:name=".AlreadyReadActivity"
+            android:label="@string/Alredy_ready"/>
+        <activity android:name=".BookActivity"
+            android:label="@string/book_details"/>
+        <activity android:name=".AllBooksActivity"
+            android:label="@string/all_books_activity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
