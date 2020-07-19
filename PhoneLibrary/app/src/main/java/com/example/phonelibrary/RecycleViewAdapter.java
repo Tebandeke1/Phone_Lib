@@ -98,7 +98,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //check if a book is removed successfully and show a text message
-                                if( Utils.getInstance().removeAlreadyReadBook(books.get(position))) {
+                                if( Utils.getInstance(context).removeAlreadyReadBook(books.get(position))) {
                                     Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
                                     notifyDataSetChanged();
                                 }
@@ -127,7 +127,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //check if a book is removed successfully and show a text message
-                                if( Utils.getInstance().removeCurrentReadingBooks(books.get(position))) {
+                                if( Utils.getInstance(context).removeCurrentReadingBooks(books.get(position))) {
                                     Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
                                     notifyDataSetChanged();
                                 }
@@ -156,7 +156,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //check if a book is removed successfully and show a text message
-                                if( Utils.getInstance().removeFavouritesBooks(books.get(position))) {
+                                if( Utils.getInstance(context).removeFavouritesBooks(books.get(position))) {
                                     Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
                                     notifyDataSetChanged();
                                 }
@@ -187,7 +187,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //check if a book is removed successfully and show a text message
-                                if( Utils.getInstance().removeWantToReadBooks(books.get(position))) {
+                                if( Utils.getInstance(context).removeWantToReadBooks(books.get(position))) {
                                     Toast.makeText(context, "Book removed.", Toast.LENGTH_SHORT).show();
                                     notifyDataSetChanged();
                                 }

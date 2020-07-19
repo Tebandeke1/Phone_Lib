@@ -26,7 +26,7 @@ public class AddToFavouritesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter.setBooks(Utils.getFavouriteBooks());
+        adapter.setBooks(Utils.getInstance(this).getFavouriteBooks());
     }
 
     //this  method helps on action bar items or menu  items

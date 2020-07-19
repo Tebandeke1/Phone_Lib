@@ -39,7 +39,7 @@ public class AllBooksActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        adapter.setBooks(Utils.getInstance().getAllBooks());
+        adapter.setBooks(Utils.getInstance(this).getAllBooks());
     }
 
     //this  method helps on action bar items or menu  items

@@ -22,9 +22,13 @@ public class WantToReadActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.wantRecBooks);
 
+        //this sets the recycle view to the desired adapter
         recyclerView.setAdapter(adapter);
 
+        //this sets the recycle view to the desired layout
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //this method sets the books clicked on to the recycle view
+        adapter.setBooks(Utils.getInstance(this).getWantToReadBooks());
     }
 
     //this  method helps on action bar items or menu  items

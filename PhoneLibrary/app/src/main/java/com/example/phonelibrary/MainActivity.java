@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         intializeResources();
 
-        Utils.getInstance();
+        Utils.getInstance(this);
 
         booksAvailable.setOnClickListener(new View.OnClickListener() {
             @Override
