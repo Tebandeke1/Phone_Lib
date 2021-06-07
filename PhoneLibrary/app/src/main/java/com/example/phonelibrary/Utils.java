@@ -58,12 +58,10 @@ public class Utils {
     }
 
     public static Utils getInstance(){
-        if (null != instance){
-            return instance;
-        }else {
+        if(null == instance){
             instance = new Utils();
-            return instance;
         }
+        return instance;
     }
 
     public static ArrayList<Books> getAllBooks() {

@@ -18,7 +18,7 @@ import static com.example.phonelibrary.RecycleViewAdapter.BOOK_ID_KEY;
 
 public class BookActivity extends AppCompatActivity {
 
-    private Button wantToread, wantToRead,AlreadyRead,Favouraties;
+    private Button wantToread, wantToRead,AlreadyRead, Favourites;
     private TextView  bookName,author,pages,longDesc;
     private ImageView imageView;
 
@@ -127,9 +127,9 @@ public class BookActivity extends AppCompatActivity {
         }
 
         if (fav){
-            Favouraties.setEnabled(false);
+            Favourites.setEnabled(false);
         }else {
-            Favouraties.setOnClickListener(new View.OnClickListener() {
+            Favourites.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (Utils.getInstance().addFavouriteBooks(incomingBook)){
@@ -182,7 +182,7 @@ public class BookActivity extends AppCompatActivity {
     //this helps to manage already read books in the Books activity
     private void handleAlreadyReadBooks(final Books incomingBook) {
 
-        final ArrayList<Books> alreadyReady = Utils.getInstance().getAlreadyReadyBooks();
+        final ArrayList<Books> alreadyReady = Utils.getAlreadyReadyBooks();
 
         boolean read = false;
         for (Books b : alreadyReady){
@@ -228,7 +228,7 @@ public class BookActivity extends AppCompatActivity {
         wantToread = findViewById(R.id.currentReading);
         wantToRead = findViewById(R.id.wantToRead);
         AlreadyRead = findViewById(R.id.already_read);
-        Favouraties = findViewById(R.id.favouritesbtn);
+        Favourites = findViewById(R.id.favouritesbtn);
         imageView = findViewById(R.id.bookImage);
 
         bookName = findViewById(R.id.bookName);
